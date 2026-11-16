@@ -9,7 +9,7 @@ export default function DeepDivesPage() {
         <h2>Engineering Deep Dives</h2>
 
         {deepDives.map((d) => (
-          <div className="dd" key={d.title}>
+          <div className="dd" key={d.title} data-reveal="up">
             <div>
               <div className="eyebrow">{d.eyebrow}</div>
               <h3>{d.title}</h3>

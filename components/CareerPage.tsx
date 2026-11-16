@@ -7,7 +7,7 @@ export default function CareerPage() {
       <div className="wrap">
         <div className="sec">
           <h2>Career</h2>
-          <div className="timeline">
+          <div className="timeline" data-reveal="stagger">
             {career.map((c) => (
               <div className={`ti${c.current ? " now" : ""}`} key={c.company}>
                 <div>

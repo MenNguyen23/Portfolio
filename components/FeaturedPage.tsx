@@ -8,7 +8,7 @@ export default function FeaturedPage() {
       <div className="wrap">
         <h2>Featured Project</h2>
 
-        <div className="case">
+        <div className="case" data-reveal="up">
           <div className="eyebrow">{featured.eyebrow}</div>
           <h1>{featured.title}</h1>
           <div className="facts">
@@ -21,7 +21,7 @@ export default function FeaturedPage() {
           </div>
         </div>
 
-        <div className="sec overview">
+        <div className="sec overview" data-reveal="stagger">
           {featured.overview.map((o) => (
             <div className="ov" key={o.k}>
               <div className="eyebrow">{o.k}</div>
@@ -32,7 +32,7 @@ export default function FeaturedPage() {
 
         <div className="sec gallery-sec">
           <h2>Screenshots</h2>
-          <div className="gallery">
+          <div className="gallery" data-reveal="stagger">
             {featured.screenshots.map((s) => (
               <Shot key={s.code} {...s} />
             ))}
@@ -41,7 +41,7 @@ export default function FeaturedPage() {
 
         <div className="sec">
           <h2>Scope of Work</h2>
-          <div className="scope">
+          <div className="scope" data-reveal="stagger">
             {featured.scope.map((s, i) => (
               <div className="sc" key={s.title}>
                 <div className="num">{String(i + 1).padStart(2, "0")}</div>
@@ -52,7 +52,7 @@ export default function FeaturedPage() {
           </div>
         </div>
 
-        <div className="nda">
+        <div className="nda" data-reveal="up">
           <b>Confidentiality</b>
           <span>{featured.nda}</span>
         </div>

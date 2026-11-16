@@ -1,5 +1,6 @@
 import { areas, profile, stats, toolbox } from "@/data/portfolio";
 import Tags from "./Tags";
+import CountUp from "./effects/CountUp";
 
 /** Page 1 · Intro */
 export default function IntroPage() {
@@ -13,7 +14,7 @@ export default function IntroPage() {
           {profile.links.map((l) => (
             <span key={l.label}>
               <b>{l.label}</b>
-              {l.value}
+              {l.href ? <a href={l.href}>{l.value}</a> : l.value}
             </span>
           ))}
         </div>
@@ -22,7 +23,7 @@ export default function IntroPage() {
       <div className="wrap">
         <div className="sec">
           <h2>About</h2>
-          <p className="lead">
+          <p className="lead" data-reveal="up">
             .NET developer with <b>7 years</b> of experience in C# back-end systems, from enterprise applications for
             Japanese clients to a production <b>multi-tenant SaaS platform</b> for an Australian client, where I am the
             primary back-end developer. I work directly with international product teams in English to clarify
@@ -30,10 +31,12 @@ export default function IntroPage() {
           </p>
         </div>
 
-        <div className="sec stats">
+        <div className="sec stats" data-reveal="stagger">
           {stats.map((s) => (
             <div className="stat" key={s.l}>
-              <div className="n">{s.n}</div>
+              <div className="n">
+                <CountUp value={s.n} />
+              </div>
               <div className="l">{s.l}</div>
             </div>
           ))}
@@ -41,7 +44,7 @@ export default function IntroPage() {
 
         <div className="sec">
           <h2>What I Do</h2>
-          <div className="areas">
+          <div className="areas" data-reveal="stagger">
             {areas.map((a) => (
               <div className="area" key={a.title}>
                 <h3>{a.title}</h3>
@@ -54,7 +57,7 @@ export default function IntroPage() {
 
         <div>
           <h2>Toolbox</h2>
-          <div className="toolbox">
+          <div className="toolbox" data-reveal="stagger">
             {toolbox.map((r) => (
               <div className="tb-row" key={r.k}>
                 <b>{r.k}</b>

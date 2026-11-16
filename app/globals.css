@@ -211,3 +211,139 @@ h3 { color:var(--navy); }
   .mini .n small { font-size:8.5pt; }
   .ti ul li::before { top:2.2mm; }
 }
+
+/* =====================================================================
+   Motion & interaction (screen only)
+   ===================================================================== */
+::selection { background:var(--teal); color:#fff; }
+html { scroll-behavior:smooth; }
+.hero .links a { color:inherit; text-decoration:none; background:linear-gradient(currentColor,currentColor) 0 100% / 0 1px no-repeat;
+                 transition:background-size .3s ease, color .2s; }
+.hero .links a:hover { color:#fff; background-size:100% 1px; }
+
+/* ---- scroll progress + back to top ---- */
+.progress { position:fixed; inset:0 0 auto 0; height:3px; z-index:50; pointer-events:none; }
+.progress-bar { height:100%; background:linear-gradient(90deg,var(--teal),#5cc6c7); transform-origin:0 50%; transform:scaleX(0); }
+.to-top { position:fixed; right:20px; bottom:20px; z-index:50; width:44px; height:44px; border:none; border-radius:50%;
+          display:grid; place-items:center; color:#fff; background:var(--navy); cursor:pointer;
+          box-shadow:0 6px 20px rgba(15,39,71,.3); opacity:0; transform:translateY(16px) scale(.9); pointer-events:none;
+          transition:opacity .3s, transform .3s, background .2s; }
+.to-top.show { opacity:1; transform:none; pointer-events:auto; }
+.to-top.show:hover { background:var(--teal); transform:translateY(-3px); }
+.to-top:focus-visible { outline:3px solid #8fd3d3; outline-offset:2px; }
+
+/* ---- hover states ---- */
+.stat, .area, .sc, .ov, .proj, .dd, .tb-row, .tag {
+  transition:transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s, border-color .28s, background-color .2s, color .2s; }
+.stat:hover, .area:hover, .sc:hover, .proj:hover {
+  transform:translateY(-4px); box-shadow:0 10px 26px rgba(15,39,71,.10); border-color:#bcd9da; }
+.ov:hover { background:#edf6f6; }
+.dd:hover { box-shadow:0 10px 30px rgba(15,39,71,.08); border-color:#bcd9da; }
+.tb-row:hover { background:var(--soft); }
+.tb-row b { transition:color .2s; }
+.tb-row:hover b { color:var(--teal); }
+.tag:hover { background:var(--teal); color:#fff; transform:translateY(-1px); }
+.sc .num { transition:letter-spacing .3s; }
+.sc:hover .num { letter-spacing:2.5px; }
+
+/* ---- screenshots: zoom on hover, lightbox on click ---- */
+.shot.zoomable { cursor:zoom-in; }
+.shot img { transition:transform .6s cubic-bezier(.2,.7,.2,1); }
+.shot.zoomable:hover img { transform:scale(1.05); }
+.shot.zoomable::after { content:"\2922  View"; position:absolute; right:2.5mm; bottom:2.5mm; z-index:1; font-size:7.5pt; font-weight:600;
+  color:#fff; background:rgba(15,39,71,.78); padding:1mm 2.5mm; border-radius:10mm; opacity:0; transform:translateY(4px);
+  transition:opacity .25s, transform .25s; }
+.shot.zoomable:hover::after, .shot.zoomable:focus-visible::after { opacity:1; transform:none; }
+.shot.zoomable:focus-visible { outline:3px solid var(--teal); outline-offset:2px; }
+
+.lightbox { position:fixed; inset:0; z-index:100; overflow:auto; overscroll-behavior:contain; padding:64px 24px 32px;
+  background:rgba(8,18,33,.86); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+  animation:lbFade .25s ease both; cursor:zoom-out; }
+/* full-page screenshots are very tall: show them wide and let the overlay scroll */
+.lightbox img { display:block; margin:0 auto; width:auto; max-width:min(1200px,100%); height:auto; border-radius:8px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5); animation:lbZoom .35s cubic-bezier(.2,.7,.2,1) both; cursor:default; }
+.lb-close { position:fixed; z-index:1; top:14px; right:18px; width:42px; height:42px; border:none; border-radius:50%; cursor:pointer;
+  font-size:26px; line-height:1; color:#fff; background:rgba(255,255,255,.12); transition:background .2s, transform .2s; }
+.lb-close:hover { background:rgba(255,255,255,.25); transform:rotate(90deg); }
+@keyframes lbFade { from { opacity:0; } }
+@keyframes lbZoom { from { opacity:0; transform:scale(.94); } }
+
+/* ---- ambient glow behind the dark banners ---- */
+.case { position:relative; }
+.hero, .case { isolation:isolate; overflow:hidden; }
+.hero::before, .case::before { content:""; position:absolute; inset:-60%; z-index:-1; pointer-events:none;
+  background:radial-gradient(circle at 30% 35%, rgba(14,138,140,.38), transparent 32%),
+             radial-gradient(circle at 72% 65%, rgba(143,211,211,.16), transparent 30%); }
+.case::before { inset:-80%; }
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .hero::before, .case::before { animation:glow 16s ease-in-out infinite alternate; }
+  @keyframes glow { 0% { transform:translate(0,0) rotate(0deg); } 50% { transform:translate(6%,-4%) rotate(8deg); } 100% { transform:translate(-5%,5%) rotate(-6deg); } }
+
+  /* hero entrance on load */
+  .hero > * { animation:heroIn .9s cubic-bezier(.2,.7,.2,1) backwards; }
+  .hero > :nth-child(2) { animation-delay:.12s; }
+  .hero > :nth-child(3) { animation-delay:.24s; }
+  .hero > :nth-child(4) { animation-delay:.36s; }
+  .hero::after { transform-origin:0 50%; animation:barIn 1.1s .3s cubic-bezier(.2,.7,.2,1) backwards; }
+  @keyframes heroIn { from { opacity:0; transform:translateY(14px); filter:blur(4px); } }
+  @keyframes barIn { from { transform:scaleX(0); } }
+
+  /* highlighted flow node breathes, arrows nudge */
+  .mini .n.hl { animation:hlPulse 2.8s ease-in-out infinite; }
+  @keyframes hlPulse { 0%,100% { box-shadow:0 0 0 0 rgba(14,138,140,0); } 50% { box-shadow:0 0 0 4px rgba(14,138,140,.22); } }
+  .mini .a { animation:nudge 1.8s ease-in-out infinite; }
+  @keyframes nudge { 0%,100% { transform:translateY(0); } 50% { transform:translateY(2px); } }
+
+  /* current job: pulsing ring */
+  .ti.now::after { content:""; position:absolute; left:-7mm; top:1.2mm; width:3mm; height:3mm; border-radius:50%;
+    border:2px solid var(--teal); animation:ring 2.2s ease-out infinite; pointer-events:none; }
+  @keyframes ring { from { transform:scale(1); opacity:.7; } to { transform:scale(2.6); opacity:0; } }
+
+  /* ---------- scroll reveal (only when <html data-rv> is set by the head script) ---------- */
+  @keyframes rvUp { from { opacity:0; transform:translateY(22px); } }
+  @keyframes rvLeft { from { opacity:0; transform:translateX(-14px); } }
+
+  html[data-rv] [data-reveal="up"]:not([data-shown]) { opacity:0; }
+  html[data-rv] [data-reveal="up"][data-shown] { animation:rvUp .8s cubic-bezier(.2,.7,.2,1) backwards; }
+
+  html[data-rv] [data-reveal="stagger"]:not([data-shown]) > * { opacity:0; }
+  html[data-rv] [data-reveal="stagger"][data-shown] > * { animation:rvUp .7s cubic-bezier(.2,.7,.2,1) backwards;
+    animation-delay:calc(var(--i, 0) * 90ms); }
+  [data-reveal="stagger"] > :nth-child(2) { --i:1; }
+  [data-reveal="stagger"] > :nth-child(3) { --i:2; }
+  [data-reveal="stagger"] > :nth-child(4) { --i:3; }
+  [data-reveal="stagger"] > :nth-child(5) { --i:4; }
+  [data-reveal="stagger"] > :nth-child(6) { --i:5; }
+  [data-reveal="stagger"] > :nth-child(n+7) { --i:6; }
+
+  /* section titles slide in and their rule draws across */
+  html[data-rv] h2:not([data-shown]) { opacity:0; }
+  html[data-rv] h2[data-shown] { animation:rvLeft .7s cubic-bezier(.2,.7,.2,1) backwards; }
+  html[data-rv] h2::after { transform-origin:0 50%; }
+  html[data-rv] h2:not([data-shown])::after { transform:scaleX(0); }
+  html[data-rv] h2[data-shown]::after { animation:barIn 1.2s .15s cubic-bezier(.2,.7,.2,1) backwards; }
+
+  /* deep-dive flow: nodes appear top to bottom after the card (transition, so the pulse/nudge animations stay) */
+  html[data-rv] .dd .mini > * { transition:opacity .5s cubic-bezier(.2,.7,.2,1), translate .5s cubic-bezier(.2,.7,.2,1);
+    transition-delay:calc(.3s + var(--j, 0) * 90ms); }
+  html[data-rv] .dd:not([data-shown]) .mini > * { opacity:0; translate:0 10px; }
+  .mini > :nth-child(2) { --j:1; } .mini > :nth-child(3) { --j:2; } .mini > :nth-child(4) { --j:3; }
+  .mini > :nth-child(5) { --j:4; } .mini > :nth-child(6) { --j:5; } .mini > :nth-child(7) { --j:6; }
+  .mini > :nth-child(8) { --j:7; } .mini > :nth-child(9) { --j:8; }
+
+  /* timeline rail draws downward */
+  html[data-rv] .timeline::before { transform-origin:50% 0; }
+  html[data-rv] .timeline:not([data-shown])::before { transform:scaleY(0); }
+  html[data-rv] .timeline[data-shown]::before { animation:railIn 1.6s cubic-bezier(.2,.7,.2,1) backwards; }
+  @keyframes railIn { from { transform:scaleY(0); } }
+}
+
+/* ---- print: no chrome, no motion, everything visible ---- */
+@media print {
+  .progress, .to-top, .lightbox { display:none !important; }
+  *, *::before, *::after { animation:none !important; transition:none !important; }
+  [data-reveal], [data-reveal] > *, h2, .mini > * { opacity:1 !important; transform:none !important; translate:none !important; }
+  h2::after, .timeline::before { transform:none !important; }
+  .hero::before, .case::before, .ti.now::after { display:none; }
+}

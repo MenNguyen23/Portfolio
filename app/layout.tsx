@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { DRAFT } from "@/data/portfolio";
+import Reveal from "@/components/effects/Reveal";
+import ScrollUI from "@/components/effects/ScrollUI";
 import "./globals.css";
 
 const inter = Inter({
@@ -34,7 +36,9 @@ const stripExtensionAttrs = `(function(){
   }});
   o.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:A});
   window.addEventListener('load',function(){setTimeout(function(){o.disconnect();},3000);});
-})();`;
+})();
+/* Enable scroll-reveal animations (hidden-until-visible) only with JS and when motion is OK. */
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.setAttribute('data-rv','');}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -45,7 +49,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: stripExtensionAttrs }} />
       </head>
       <body className={DRAFT ? "draft" : undefined} suppressHydrationWarning>
+        <ScrollUI />
         {children}
+        <Reveal />
       </body>
     </html>
   );

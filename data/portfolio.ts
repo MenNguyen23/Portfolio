@@ -21,10 +21,10 @@ export const profile = {
   tagline:
     "I build reliable back-end systems for multi-tenant SaaS: async messaging, third-party integrations, identity and payments.",
   links: [
-    { label: "Email", value: "ntmen98@gmail.com" },
-    { label: "Phone", value: "(+84) 868 647 331" },
+    { label: "Email", value: "ntmen98@gmail.com", href: "mailto:ntmen98@gmail.com" },
+    { label: "Phone", value: "(+84) 868 647 331", href: "tel:+84868647331" },
     { label: "Location", value: "Ho Chi Minh City, Vietnam" },
-  ],
+  ] as { label: string; value: string; href?: string }[],
 };
 
 export const stats = [
@@ -201,15 +201,6 @@ export const projects: {
     text: "Two desktop applications for radar data visualisation with custom GDI+ rendering, designed and implemented independently.",
     tags: ["C#", "WinForms", "GDI+", "GitLab"],
     shot: { src: "/images/IMG-07.png", code: "IMG-07", hint: "Radar data\nvisualisation screen" },
-  },
-  {
-    company: "Freelance · 2-person team",
-    years: "2021 – 2023",
-    title: "Corporate Website",
-    text: "Developed the News module and its unit tests.",
-    tags: ["PHP", "Laravel", "MySQL", "GitLab"],
-    shot: { src: "/images/IMG-08.png", code: "IMG-08", hint: "Corporate website\nNews page" },
-    wide: true,
   },
 ];
 

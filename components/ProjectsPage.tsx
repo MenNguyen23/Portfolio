@@ -8,7 +8,7 @@ export default function ProjectsPage() {
     <section className="page">
       <div className="wrap">
         <h2>More Projects</h2>
-        <div className="projects">
+        <div className="projects" data-reveal="stagger">
           {projects.map((p) => (
             <div className={`proj${p.wide ? " wide" : ""}`} key={p.title}>
               {p.shot && <Shot {...p.shot} />}
