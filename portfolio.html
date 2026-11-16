@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nguyen Thi Men — .NET Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  /* Images load from images/ (tries .png, then .jpg). Missing images show a placeholder in draft mode
+     and are hidden automatically in final mode (<body> without class="draft"). */
+  function ph(i){
+    if(!i.dataset.t){ i.dataset.t=1; i.src=i.src.replace(/\.png$/,'.jpg'); }
+    else { var f=i.closest('figure'); i.remove(); if(f) f.classList.add('empty'); }
+  }
+</script>
+<style>
+  @page { size:A4; margin:0; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  :root { --navy:#0f2747; --navy2:#1b3d6b; --teal:#0e8a8c; --teal-soft:#e4f3f3;
+          --ink:#1c2530; --body:#3a4553; --muted:#6b7684; --line:#e2e7ee; --soft:#f5f7fa; }
+  body { font-family:'Inter','Segoe UI',Arial,sans-serif; color:var(--ink); background:#cfd5dd; font-size:9.3pt; line-height:1.5;
+         -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .page { width:210mm; height:297mm; margin:10mm auto; background:#fff; position:relative; overflow:hidden; page-break-after:always; }
+  .page:last-child { page-break-after:auto; }
+  @media print { body{background:#fff} .page{margin:0} }
+  .wrap { padding:12mm 14mm; }
+
+  /* ---------- placeholders & images ---------- */
+  .fill { background:none; color:inherit; }
+  .draft .fill { background:#fff1a8; color:#5a4500; padding:0 1mm; border-radius:1mm; font-weight:600; }
+  .shot { position:relative; overflow:hidden; border-radius:2.5mm; border:1px solid var(--line); background:#fff;
+          display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:3mm; color:#5b6b7d; }
+  .shot .k, .shot .d { visibility:hidden; }
+  .shot img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top center; }
+  .draft .shot.empty { border:1.5px dashed #9fb3c8;
+          background:repeating-linear-gradient(45deg,#f5f8fb,#f5f8fb 6px,#edf2f7 6px,#edf2f7 12px); }
+  .draft .shot.empty .k, .draft .shot.empty .d { visibility:visible; }
+  .shot .k { font-weight:800; font-size:8.8pt; color:var(--navy); letter-spacing:.5px; }
+  .shot .d { font-size:7.3pt; line-height:1.35; margin-top:1mm; }
+  body:not(.draft) .shot.empty { display:none; }
+  body:not(.draft) .gallery-sec:not(:has(.shot:not(.empty))) { display:none; }
+
+  /* ---------- shared ---------- */
+  .eyebrow { font-size:7.3pt; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--teal); }
+  h2 { font-size:10pt; font-weight:800; letter-spacing:1.4px; text-transform:uppercase; color:var(--navy);
+       display:flex; align-items:center; gap:3mm; margin-bottom:3mm; }
+  h2::after { content:""; flex:1; height:1px; background:var(--line); }
+  h3 { color:var(--navy); }
+  .tags { display:flex; flex-wrap:wrap; gap:1.3mm; }
+  .tag { font-size:7.5pt; font-weight:500; color:var(--navy); background:#edf2f8; padding:0.5mm 2.2mm; border-radius:10mm; }
+  .sec { margin-bottom:6mm; }
+
+  /* ---------- page 1 ---------- */
+  .hero { background:linear-gradient(120deg,var(--navy) 0%,var(--navy2) 70%,#21507f 100%); color:#fff; padding:13mm 14mm 10mm; position:relative; }
+  .hero::after { content:""; position:absolute; left:0; right:0; bottom:0; height:1.5mm; background:var(--teal); }
+  .hero h1 { font-size:30pt; font-weight:800; letter-spacing:-0.5px; line-height:1.05; }
+  .hero .role { font-size:12.5pt; font-weight:600; margin-top:1.5mm; color:#bfe6e6; }
+  .hero .tagline { font-size:9.6pt; color:#dbe4ef; margin-top:3mm; max-width:150mm; line-height:1.5; }
+  .hero .links { display:flex; flex-wrap:wrap; gap:1.5mm 8mm; margin-top:5mm; font-size:8.6pt; color:#dbe4ef; }
+  .hero .links b { color:#fff; font-weight:600; margin-right:1.5mm; }
+
+  .lead { font-size:9.6pt; color:var(--body); line-height:1.6; }
+  .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:3mm; }
+  .stat { border:1px solid var(--line); border-radius:2.5mm; padding:3mm; border-left:2.5px solid var(--teal); }
+  .stat .n { font-size:18pt; font-weight:800; color:var(--navy); line-height:1; }
+  .stat .l { font-size:7.5pt; color:var(--muted); margin-top:1.3mm; line-height:1.35; }
+
+  .areas { display:grid; grid-template-columns:1fr 1fr; gap:3mm; }
+  .area { border:1px solid var(--line); border-radius:2.5mm; padding:3.5mm; border-top:2.5px solid var(--teal); }
+  .area h3 { font-size:9.3pt; margin-bottom:1mm; }
+  .area p { font-size:8.2pt; color:var(--body); margin-bottom:2mm; line-height:1.4; }
+
+  .toolbox { border:1px solid var(--line); border-radius:2.5mm; }
+  .tb-row { display:grid; grid-template-columns:36mm 1fr; gap:3mm; padding:1.8mm 4mm; border-bottom:1px solid var(--line); font-size:8.3pt; }
+  .tb-row:last-child { border-bottom:none; }
+  .tb-row b { color:var(--navy); font-weight:700; }
+  .tb-row span { color:var(--body); }
+
+  /* ---------- page 2 ---------- */
+  .case { background:linear-gradient(120deg,var(--navy),var(--navy2)); color:#fff; border-radius:3.5mm; padding:6mm 6.5mm 5.5mm; margin-bottom:5mm; }
+  .case .eyebrow { color:#8fd3d3; }
+  .case h1 { font-size:15.5pt; font-weight:800; margin:1.2mm 0 3mm; line-height:1.2; }
+  .case .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:3mm; border-top:1px solid rgba(255,255,255,.18); padding-top:3mm; }
+  .case .facts div { font-size:7.2pt; color:#b9c8da; text-transform:uppercase; letter-spacing:.8px; }
+  .case .facts b { display:block; font-size:8.6pt; color:#fff; text-transform:none; letter-spacing:0; font-weight:600; margin-top:.8mm; }
+
+  .overview { display:grid; grid-template-columns:repeat(3,1fr); gap:3.5mm; }
+  .ov { background:var(--soft); border-radius:2.5mm; padding:3.5mm; }
+  .ov .eyebrow { margin-bottom:1.2mm; }
+  .ov p { font-size:8.3pt; color:var(--body); line-height:1.45; }
+
+  .gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; }
+  .gallery .shot { height:40mm; }
+
+  .scope { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; }
+  .sc { border:1px solid var(--line); border-radius:2.5mm; padding:3.5mm; }
+  .sc .num { font-size:7.3pt; font-weight:800; color:var(--teal); letter-spacing:1px; }
+  .sc h3 { font-size:9.4pt; margin:0.6mm 0 1mm; }
+  .sc p { font-size:8.2pt; color:var(--body); line-height:1.4; }
+
+  .nda { display:flex; gap:3mm; align-items:flex-start; background:var(--teal-soft); border-radius:2.5mm; padding:3.5mm 4mm; font-size:8.2pt; color:var(--body); }
+  .nda b { color:var(--navy); white-space:nowrap; }
+
+  /* ---------- page 3 ---------- */
+  .dd { display:grid; grid-template-columns:1fr 54mm; gap:5mm; border:1px solid var(--line); border-radius:2.5mm; padding:4.5mm; margin-bottom:5mm; }
+  .dd:last-child { margin-bottom:0; }
+  .dd h3 { font-size:10.5pt; margin:0.8mm 0 1mm; }
+  .dd .row { display:grid; grid-template-columns:19mm 1fr; gap:2mm; margin-top:1.8mm; }
+  .dd .row b { font-size:7.2pt; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--teal); padding-top:.5mm; }
+  .dd .row p { font-size:8.5pt; color:var(--body); line-height:1.45; }
+
+  .mini { background:var(--soft); border-radius:2.5mm; padding:3mm; display:flex; flex-direction:column; align-items:stretch; justify-content:center; gap:0.8mm; }
+  .mini .lbl { font-size:6.8pt; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:1mm; }
+  .mini .n { background:#fff; border:1px solid var(--line); border-radius:1.8mm; padding:1.5mm 2mm; text-align:center; font-size:7.8pt; font-weight:600; color:var(--navy); line-height:1.3; }
+  .mini .n small { display:block; font-size:6.8pt; font-weight:500; color:var(--muted); }
+  .mini .n.hl { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .mini .n.hl small { color:#b9c8da; }
+  .mini .a { text-align:center; color:var(--teal); font-weight:800; font-size:8pt; line-height:1; }
+
+  /* ---------- page 4 ---------- */
+  .projects { display:grid; grid-template-columns:1fr 1fr; gap:4mm; }
+  .proj { border:1px solid var(--line); border-radius:2.5mm; overflow:hidden; display:flex; flex-direction:column; border-top:2.5px solid var(--navy); }
+  .proj > .shot { height:34mm; border:none; border-bottom:1px solid var(--line); border-radius:0; }
+  .draft .proj > .shot.empty { border:none; border-bottom:1.5px dashed #9fb3c8; }
+  .proj .body { padding:3.8mm 4mm 4mm; flex:1; display:flex; flex-direction:column; }
+  .proj .top { display:flex; justify-content:space-between; gap:2mm; }
+  .proj .yr { font-size:7.4pt; color:var(--muted); white-space:nowrap; }
+  .proj h3 { font-size:9.8pt; margin:1mm 0 1.2mm; }
+  .proj p { font-size:8.3pt; color:var(--body); flex:1; margin-bottom:2.2mm; line-height:1.45; }
+  .proj.wide { grid-column:1 / -1; flex-direction:row; }
+  .proj.wide > .shot { width:70mm; height:auto; min-height:34mm; border-bottom:none; border-right:1px solid var(--line); flex-shrink:0; }
+  .draft .proj.wide > .shot.empty { border-bottom:none; border-right:1.5px dashed #9fb3c8; }
+
+  /* ---------- page 5 ---------- */
+  .timeline { position:relative; padding-left:7mm; }
+  .timeline::before { content:""; position:absolute; left:1.5mm; top:1.5mm; bottom:2mm; width:1.5px; background:var(--line); }
+  .ti { position:relative; margin-bottom:4.5mm; display:grid; grid-template-columns:1fr 36mm; gap:4mm; }
+  .ti:last-child { margin-bottom:0; }
+  .ti::before { content:""; position:absolute; left:-7mm; top:1.2mm; width:3mm; height:3mm; border-radius:50%; background:#fff; border:2px solid var(--teal); }
+  .ti.now::before { background:var(--teal); }
+  .ti .co { font-weight:700; font-size:9.6pt; }
+  .ti .pos { font-size:8.6pt; color:var(--teal); font-weight:600; }
+  .ti .dt { font-size:8.2pt; color:var(--muted); text-align:right; padding-top:.5mm; }
+  .ti ul { list-style:none; margin-top:1.2mm; }
+  .ti ul li { position:relative; padding-left:4mm; font-size:8.3pt; color:var(--body); line-height:1.45; margin-bottom:0.8mm; }
+  .ti ul li:last-child { margin-bottom:0; }
+  .ti ul li::before { content:""; position:absolute; left:0; top:1.6mm; width:1.6mm; height:1.6mm; border-radius:50%; background:var(--teal); }
+
+  .quote { background:var(--teal-soft); border-radius:2.5mm; padding:5mm 6mm; position:relative; }
+  .quote::before { content:"\201C"; position:absolute; left:4mm; top:-1mm; font-size:34pt; color:var(--teal); font-weight:800; line-height:1; }
+  .quote p { font-size:9.4pt; color:var(--ink); padding-left:6mm; font-style:italic; line-height:1.55; }
+  .quote .by { font-size:8pt; color:var(--muted); margin-top:2mm; padding-left:6mm; }
+
+  .cta { background:linear-gradient(120deg,var(--navy),var(--navy2)); color:#fff; border-radius:3.5mm; padding:7mm 7mm;
+         display:grid; grid-template-columns:1fr auto; gap:6mm; align-items:center; }
+  .cta h3 { color:#fff; font-size:14pt; }
+  .cta p { font-size:8.8pt; color:#c9d6e6; margin-top:1mm; }
+  .cta .c { font-size:8.6pt; color:#dbe4ef; line-height:1.8; text-align:right; }
+  .cta .c b { color:#fff; margin-right:1.5mm; }
+</style>
+</head>
+<body class="draft">
+
+<!-- ======================= PAGE 1 · INTRO ======================= -->
+<section class="page">
+  <header class="hero">
+    <h1>Nguyen Thi Men</h1>
+    <div class="role">.NET Developer</div>
+    <div class="tagline">I build reliable back-end systems for multi-tenant SaaS: async messaging, third-party integrations, identity and payments.</div>
+    <div class="links">
+      <span><b>Email</b>ntmen98@gmail.com</span>
+      <span><b>Phone</b>(+84) 868 647 331</span>
+      <span><b>Location</b>Ho Chi Minh City, Vietnam</span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="sec">
+      <h2>About</h2>
+      <p class="lead">.NET developer with <b>7 years</b> of experience in C# back-end systems, from enterprise applications for Japanese clients to a production <b>multi-tenant SaaS platform</b> for an Australian client, where I am the primary back-end developer. I work directly with international product teams in English to clarify requirements and deliver technical updates.</p>
+    </div>
+
+    <div class="sec stats">
+      <div class="stat"><div class="n">7+</div><div class="l">Years of .NET / C# development</div></div>
+      <div class="stat"><div class="n">10+</div><div class="l">Third-party data sources integrated</div></div>
+      <div class="stat"><div class="n">10+</div><div class="l">Projects delivered, web &amp; desktop</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Client markets: Vietnam, Japan, Australia</div></div>
+    </div>
+
+    <div class="sec">
+      <h2>What I Do</h2>
+      <div class="areas">
+        <div class="area">
+          <h3>Async Processing &amp; Integration</h3>
+          <p>Message-driven services and pipelines that ingest, deduplicate and index external data.</p>
+          <div class="tags"><span class="tag">NServiceBus</span><span class="tag">MSMQ</span><span class="tag">Selenium WebDriver</span></div>
+        </div>
+        <div class="area">
+          <h3>Cloud &amp; Search</h3>
+          <p>Object storage and full-text search in a production SaaS platform.</p>
+          <div class="tags"><span class="tag">Amazon S3</span><span class="tag">Amazon OpenSearch Service</span></div>
+        </div>
+        <div class="area">
+          <h3>Identity &amp; Security</h3>
+          <p>Social and enterprise sign-in, MFA and per-tenant authorization.</p>
+          <div class="tags"><span class="tag">OAuth 2.0 / OIDC</span><span class="tag">Microsoft Entra ID</span><span class="tag">TOTP MFA</span></div>
+        </div>
+        <div class="area">
+          <h3>Payments &amp; Billing</h3>
+          <p>Multi-tenant payments and the full subscription lifecycle.</p>
+          <div class="tags"><span class="tag">Stripe Connect</span><span class="tag">Checkout</span><span class="tag">Webhooks</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2>Toolbox</h2>
+      <div class="toolbox">
+        <div class="tb-row"><b>Core</b><span>C#, .NET Framework 4.8, ASP.NET Core, ASP.NET MVC 5, Web API, WCF, Blazor</span></div>
+        <div class="tb-row"><b>Data &amp; Messaging</b><span>SQL Server, RavenDB, SQLite, MySQL, Dapper, NServiceBus, MSMQ</span></div>
+        <div class="tb-row"><b>Architecture</b><span>SOA, Event-Driven, Multi-tenancy, Repository, Strategy, Command, Pipeline, DI</span></div>
+        <div class="tb-row"><b>DevOps &amp; Tooling</b><span>TeamCity CI/CD, Git, GitHub, GitLab, TFS, TortoiseSVN, Jira, log4net, Windows Server</span></div>
+        <div class="tb-row"><b>Front-End &amp; Desktop</b><span>Razor, HTML, CSS, JavaScript, jQuery, Bootstrap, WPF, WinForms, GDI+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PAGE 2 · FEATURED PROJECT ======================= -->
+<section class="page">
+  <div class="wrap">
+    <h2>Featured Project</h2>
+
+    <div class="case">
+      <div class="eyebrow">Groove Technology · Australian Client</div>
+      <h1>Multi-tenant SaaS Platform for the Events Industry</h1>
+      <div class="facts">
+        <div>Role<b>Primary Back-End Developer</b></div>
+        <div>Period<b>Apr 2022 – Present</b></div>
+        <div>Team<b>5 · PM, TL, BE, FE, QC</b></div>
+        <div>Stack<b>C# · ASP.NET MVC 5 · WCF</b></div>
+      </div>
+    </div>
+
+    <div class="sec overview">
+      <div class="ov"><div class="eyebrow">The product</div>
+        <p>A multi-tenant SaaS platform for discovering and managing events, aggregating event data from third-party platforms.</p></div>
+      <div class="ov"><div class="eyebrow">My role</div>
+        <p>Joined a platform already four years in production and took ownership of back-end development: new features, maintenance and troubleshooting.</p></div>
+      <div class="ov"><div class="eyebrow">Collaboration</div>
+        <p>Worked directly with the client's product team in English to discuss features, clarify specs and share technical updates.</p></div>
+    </div>
+
+    <div class="sec gallery-sec">
+      <h2>Screenshots</h2>
+      <div class="gallery">
+        <figure class="shot"><img src="images/IMG-01.png" alt="" onerror="ph(this)">
+          <div class="k">IMG-01</div><div class="d">Main screen<br>(only if permitted; blur client data)</div></figure>
+        <figure class="shot"><img src="images/IMG-02.png" alt="" onerror="ph(this)">
+          <div class="k">IMG-02</div><div class="d">Search / event list<br>(only if permitted)</div></figure>
+        <figure class="shot"><img src="images/IMG-03.png" alt="" onerror="ph(this)">
+          <div class="k">IMG-03</div><div class="d">Sign-in or billing screen<br>(test data only)</div></figure>
+      </div>
+    </div>
+
+    <div class="sec">
+      <h2>Scope of Work</h2>
+      <div class="scope">
+        <div class="sc"><div class="num">01</div><h3>Data Ingestion</h3>
+          <p>Crawlers integrating 10+ third-party sources, for both JavaScript-rendered and static sites.</p></div>
+        <div class="sc"><div class="num">02</div><h3>Async Processing</h3>
+          <p>Message-driven background handlers with NServiceBus over MSMQ in a service-oriented architecture.</p></div>
+        <div class="sc"><div class="num">03</div><h3>Search &amp; Storage</h3>
+          <p>Full-text event search with Amazon OpenSearch Service; file storage on Amazon S3.</p></div>
+        <div class="sc"><div class="num">04</div><h3>Identity &amp; Access</h3>
+          <p>SSO via OAuth 2.0 / OIDC, TOTP-based MFA, and roles configurable per tenant at runtime.</p></div>
+        <div class="sc"><div class="num">05</div><h3>Payments</h3>
+          <p>Stripe Connect, Checkout, Billing Portal and webhooks for the subscription lifecycle.</p></div>
+        <div class="sc"><div class="num">06</div><h3>Delivery</h3>
+          <p>RESTful APIs, server-side validation and TeamCity CI/CD to Windows Server.</p></div>
+      </div>
+    </div>
+
+    <div class="nda"><b>Confidentiality</b><span>Client project under NDA. The client's name, internal architecture and business figures are intentionally omitted; screenshots, where shown, use non-sensitive or test data.</span></div>
+  </div>
+</section>
+
+<!-- ======================= PAGE 3 · ENGINEERING DEEP DIVES ======================= -->
+<section class="page">
+  <div class="wrap">
+    <h2>Engineering Deep Dives</h2>
+
+    <div class="dd">
+      <div>
+        <div class="eyebrow">Challenge 01 · Data Pipeline</div>
+        <h3>Ingesting events from 10+ heterogeneous sources</h3>
+        <div class="row"><b>Problem</b><p>Sources differ: some render content with JavaScript, others serve static HTML, and the same event can appear in several sources.</p></div>
+        <div class="row"><b>Approach</b><p>Source-specific crawlers (Selenium WebDriver with headless Chrome, or HTTP scraping) publish messages to NServiceBus over MSMQ; separate handlers deduplicate, index and store the data.</p></div>
+        <div class="row"><b>Outcome</b><p>Crawling is decoupled from indexing and storage, which run asynchronously in the background.</p></div>
+      </div>
+      <div class="mini">
+        <div class="lbl">Approach (generic)</div>
+        <div class="n">Third-party sources</div><div class="a">↓</div>
+        <div class="n">Crawlers<small>Selenium · HTTP</small></div><div class="a">↓</div>
+        <div class="n hl">Message bus<small>NServiceBus · MSMQ</small></div><div class="a">↓</div>
+        <div class="n">Handlers<small>dedupe · index · store</small></div><div class="a">↓</div>
+        <div class="n">Search &amp; storage<small>OpenSearch · S3</small></div>
+      </div>
+    </div>
+
+    <div class="dd">
+      <div>
+        <div class="eyebrow">Challenge 02 · Identity &amp; Access</div>
+        <h3>Multiple sign-in providers, MFA and per-tenant roles</h3>
+        <div class="row"><b>Problem</b><p>The platform needed Microsoft, Apple and Facebook sign-in, stronger protection for administrator accounts, and access rules that differ per tenant.</p></div>
+        <div class="row"><b>Approach</b><p>OAuth 2.0 / OpenID Connect for each provider (app registrations, redirect URIs, claims mapping), TOTP-based MFA for administrators, and a role &amp; permission model configurable at runtime.</p></div>
+        <div class="row"><b>Outcome</b><p>Roles and access levels can be changed per tenant without a code release.</p></div>
+      </div>
+      <div class="mini">
+        <div class="lbl">Approach (generic)</div>
+        <div class="n">User sign-in</div><div class="a">↓</div>
+        <div class="n hl">OAuth 2.0 / OIDC<small>Microsoft · Apple · Facebook</small></div><div class="a">↓</div>
+        <div class="n">TOTP MFA<small>administrator accounts</small></div><div class="a">↓</div>
+        <div class="n">Per-tenant roles<small>configured at runtime</small></div>
+      </div>
+    </div>
+
+    <div class="dd">
+      <div>
+        <div class="eyebrow">Challenge 03 · Payments</div>
+        <h3>Multi-tenant payments with Stripe Connect</h3>
+        <div class="row"><b>Problem</b><p>Each tenant needed to receive payments into its own account, while subscriptions and access had to stay in sync with billing.</p></div>
+        <div class="row"><b>Approach</b><p>Stripe Connect with a connected account per tenant; Stripe Checkout and Billing Portal for subscriptions; webhook handlers covering the full subscription lifecycle.</p></div>
+        <div class="row"><b>Outcome</b><p>Access roles are assigned automatically from payment events, with no manual admin step.</p></div>
+      </div>
+      <div class="mini">
+        <div class="lbl">Approach (generic)</div>
+        <div class="n">Tenant subscribes<small>Checkout · Billing Portal</small></div><div class="a">↓</div>
+        <div class="n hl">Stripe Connect<small>connected account per tenant</small></div><div class="a">↓</div>
+        <div class="n">Webhook handlers<small>subscription lifecycle</small></div><div class="a">↓</div>
+        <div class="n">Automatic role assignment</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PAGE 4 · MORE PROJECTS ======================= -->
+<section class="page">
+  <div class="wrap">
+    <h2>More Projects</h2>
+    <div class="projects">
+      <div class="proj">
+        <div class="body">
+          <div class="top"><span class="eyebrow">RYOMO Vietnam Solutions</span><span class="yr">2019 – 2021</span></div>
+          <h3>Enterprise Gas Management System</h3>
+          <p>Multiple phases of an enterprise system for a Japanese client across four technology stacks, built from Japanese-language specifications. Design, coding, unit testing, maintenance and troubleshooting.</p>
+          <div class="tags"><span class="tag">C#</span><span class="tag">Web Forms</span><span class="tag">WinForms</span><span class="tag">WPF</span><span class="tag">VB.NET</span><span class="tag">SQL Server</span></div>
+        </div>
+      </div>
+      <div class="proj">
+        <figure class="shot"><img src="images/IMG-05.png" alt="" onerror="ph(this)">
+          <div class="k">IMG-05</div><div class="d">HR platform<br>(only if permitted)</div></figure>
+        <div class="body">
+          <div class="top"><span class="eyebrow">FPT Telecom</span><span class="yr">2021</span></div>
+          <h3>Enterprise HR Platform</h3>
+          <p>Onsite full-stack developer within a 22-person cross-functional team, responsible for design, feature development and unit testing.</p>
+          <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">Web Forms</span><span class="tag">SQL Server</span><span class="tag">SVN</span></div>
+        </div>
+      </div>
+      <div class="proj">
+        <figure class="shot"><img src="images/IMG-06.png" alt="" onerror="ph(this)">
+          <div class="k">IMG-06</div><div class="d">Recruitment platform<br>home or job listing page</div></figure>
+        <div class="body">
+          <div class="top"><span class="eyebrow">Freelance · Solo</span><span class="yr">2021 – 2023</span></div>
+          <h3>Recruitment Platform</h3>
+          <p>Designed, built, tested and deployed a recruitment website end-to-end as the sole developer.</p>
+          <div class="tags"><span class="tag">ASP.NET Core</span><span class="tag">RESTful API</span><span class="tag">SQL Server</span></div>
+        </div>
+      </div>
+      <div class="proj">
+        <figure class="shot"><img src="images/IMG-07.png" alt="" onerror="ph(this)">
+          <div class="k">IMG-07</div><div class="d">Radar data<br>visualisation screen</div></figure>
+        <div class="body">
+          <div class="top"><span class="eyebrow">Freelance · Desktop</span><span class="yr">2021 – 2023</span></div>
+          <h3>Radar Data Visualisation (×2)</h3>
+          <p>Two desktop applications for radar data visualisation with custom GDI+ rendering, designed and implemented independently.</p>
+          <div class="tags"><span class="tag">C#</span><span class="tag">WinForms</span><span class="tag">GDI+</span><span class="tag">GitLab</span></div>
+        </div>
+      </div>
+      <div class="proj wide">
+        <figure class="shot"><img src="images/IMG-08.png" alt="" onerror="ph(this)">
+          <div class="k">IMG-08</div><div class="d">Corporate website<br>News page</div></figure>
+        <div class="body">
+          <div class="top"><span class="eyebrow">Freelance · 2-person team</span><span class="yr">2021 – 2023</span></div>
+          <h3>Corporate Website</h3>
+          <p>Developed the News module and its unit tests.</p>
+          <div class="tags"><span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">MySQL</span><span class="tag">GitLab</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PAGE 5 · CAREER · CONTACT ======================= -->
+<section class="page">
+  <div class="wrap">
+    <div class="sec">
+      <h2>Career</h2>
+      <div class="timeline">
+        <div class="ti now">
+          <div>
+            <div class="co">Groove Technology</div>
+            <div class="pos">Back-End .NET Developer</div>
+            <ul>
+              <li>Owned back-end development of a production multi-tenant SaaS platform for an Australian client</li>
+              <li>Delivered the data ingestion pipeline, SSO/MFA and Stripe Connect integrations</li>
+              <li>Worked directly with the client's product team in English</li>
+            </ul>
+          </div>
+          <div class="dt">Apr 2022 – Present</div>
+        </div>
+        <div class="ti">
+          <div>
+            <div class="co">Freelance</div>
+            <div class="pos">.NET Developer · alongside main role</div>
+            <ul>
+              <li>Delivered web and desktop applications for Vietnamese clients, from design through deployment</li>
+            </ul>
+          </div>
+          <div class="dt">Feb 2021 – Apr 2023</div>
+        </div>
+        <div class="ti">
+          <div>
+            <div class="co">FPT Telecom Joint Stock Company</div>
+            <div class="pos">Onsite Full-Stack Developer</div>
+            <ul>
+              <li>Developed features for an enterprise HR platform in a 22-person cross-functional team</li>
+              <li>Covered design, coding and unit testing with ASP.NET Core and ASP.NET Web Forms</li>
+            </ul>
+          </div>
+          <div class="dt">Apr 2021 – Sep 2021</div>
+        </div>
+        <div class="ti">
+          <div>
+            <div class="co">RYOMO Vietnam Solutions</div>
+            <div class="pos">.NET Developer</div>
+            <ul>
+              <li>Delivered multiple phases of an enterprise system for a Japanese client</li>
+              <li>Worked across ASP.NET Web Forms, WinForms, WPF and VB.NET / VB6 with SQL Server</li>
+              <li>Worked from Japanese-language specifications; handled maintenance and troubleshooting</li>
+            </ul>
+          </div>
+          <div class="dt">Aug 2019 – Mar 2021</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
