@@ -8,7 +8,7 @@
 export const DRAFT = true;
 
 export type ShotData = {
-  /** Path under /public, e.g. "/images/IMG-01.png" (falls back to .jpg automatically) */
+  /** Path under /public, e.g. "/images/IMG-01.jpg". A ".png" path falls back to ".jpg" automatically. */
   src: string;
   code: string;
   /** Placeholder hint, lines separated by "\n" */
@@ -89,8 +89,8 @@ export const featured = {
     },
   ],
   screenshots: [
-    { src: "/images/IMG-01.png", code: "IMG-01", hint: "Main screen\n(only if permitted; blur client data)" },
-    { src: "/images/IMG-02.png", code: "IMG-02", hint: "Search / event list\n(only if permitted)" },
+    { src: "/images/IMG-01.jpg", code: "IMG-01", hint: "Main screen\n(only if permitted; blur client data)" },
+    { src: "/images/IMG-02.jpg", code: "IMG-02", hint: "Search / event list\n(only if permitted)" },
     { src: "/images/IMG-03.png", code: "IMG-03", hint: "Sign-in or billing screen\n(test data only)" },
   ] satisfies ShotData[],
   scope: [
