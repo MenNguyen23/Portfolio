@@ -196,11 +196,10 @@ export const projects: {
   },
   {
     company: "Freelance · Desktop",
-    years: "2021 – 2023",
-    title: "Radar Data Visualisation (×2)",
-    text: "Two desktop applications for radar data visualisation with custom GDI+ rendering, designed and implemented independently.",
-    tags: ["C#", "WinForms", "GDI+", "GitLab"],
-    shot: { src: "/images/IMG-07.png", code: "IMG-07", hint: "Radar data\nvisualisation screen" },
+    years: "2019 – 2021",
+    title: "Real-time Training Simulator",
+    text: "Two versions of a desktop training simulator with real-time custom GDI+ rendering and a hardware control panel over a serial port, designed and implemented independently. Client details are confidential.",
+    tags: ["C#", "WinForms", "GDI+", "Serial Port"],
   },
 ];
 

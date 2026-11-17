@@ -6,9 +6,9 @@ body { font-family:var(--font-inter),'Inter','Segoe UI',Arial,sans-serif; color:
        -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 /* Screen: A4-width sheet that grows with its content. Print: exact A4 pages (see @media print). */
-.page { width:210mm; min-height:297mm; margin:10mm auto; background:#fff; position:relative; overflow:hidden; page-break-after:always;
+.page { width:210mm; min-height:297mm; margin:10mm auto; background:#fff; position:relative; overflow:hidden; page-break-after:always; break-after:page;
         box-shadow:0 1px 3px rgba(15,39,71,.08), 0 8px 24px rgba(15,39,71,.08); }
-.page:last-child { page-break-after:auto; }
+.page:last-of-type { page-break-after:auto; break-after:auto; }
 @media print { body{background:#fff} .page{margin:0; height:297mm; min-height:0; box-shadow:none} }
 .wrap { padding:12mm 14mm; }
 
@@ -339,9 +339,18 @@ html { scroll-behavior:smooth; }
   @keyframes railIn { from { transform:scaleY(0); } }
 }
 
+/* ---- save as PDF button ---- */
+.pdf-btn { position:fixed; right:20px; top:18px; z-index:50; height:40px; padding:0 16px 0 13px; border:none; border-radius:20px;
+  display:inline-flex; align-items:center; gap:7px; font:600 13px/1 var(--font-inter, Inter), sans-serif; letter-spacing:.3px;
+  color:#fff; background:var(--teal); cursor:pointer; box-shadow:0 6px 20px rgba(15,39,71,.25);
+  transition:background .2s, transform .2s, box-shadow .2s; }
+.pdf-btn:hover { background:var(--navy); transform:translateY(-2px); box-shadow:0 10px 26px rgba(15,39,71,.3); }
+.pdf-btn:focus-visible { outline:3px solid #8fd3d3; outline-offset:2px; }
+@media screen and (max-width: 600px) { .pdf-btn { top:auto; bottom:20px; right:auto; left:16px; } }
+
 /* ---- print: no chrome, no motion, everything visible ---- */
 @media print {
-  .progress, .to-top, .lightbox { display:none !important; }
+  .progress, .to-top, .pdf-btn, .lightbox { display:none !important; }
   *, *::before, *::after { animation:none !important; transition:none !important; }
   [data-reveal], [data-reveal] > *, h2, .mini > * { opacity:1 !important; transform:none !important; translate:none !important; }
   h2::after, .timeline::before { transform:none !important; }
