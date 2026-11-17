@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { DRAFT } from "@/data/portfolio";
+import { DRAFT, profile } from "@/data/portfolio";
 import Reveal from "@/components/effects/Reveal";
 import ScrollUI from "@/components/effects/ScrollUI";
 import "./globals.css";
@@ -49,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: stripExtensionAttrs }} />
       </head>
       <body className={DRAFT ? "draft" : undefined} suppressHydrationWarning>
-        <ScrollUI />
+        <ScrollUI pdfFileName={`${profile.name.replace(/\s+/g, "-")}-Portfolio`} />
         {children}
         <Reveal />
       </body>

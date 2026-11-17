@@ -4,13 +4,13 @@ import Shot from "./Shot";
 /** Page 2 · Featured project */
 export default function FeaturedPage() {
   return (
-    <section className="page">
+    <section className="page" aria-label="Featured project">
       <div className="wrap">
         <h2>Featured Project</h2>
 
         <div className="case" data-reveal="up">
           <div className="eyebrow">{featured.eyebrow}</div>
-          <h1>{featured.title}</h1>
+          <h3>{featured.title}</h3>
           <div className="facts">
             {featured.facts.map((f) => (
               <div key={f.k}>

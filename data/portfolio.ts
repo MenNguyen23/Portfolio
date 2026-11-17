@@ -13,6 +13,8 @@ export type ShotData = {
   code: string;
   /** Placeholder hint, lines separated by "\n" */
   hint: string;
+  /** Describes what the screenshot shows, for screen readers */
+  alt: string;
 };
 
 export const profile = {
@@ -89,9 +91,9 @@ export const featured = {
     },
   ],
   screenshots: [
-    { src: "/images/IMG-01.jpg", code: "IMG-01", hint: "Main screen\n(only if permitted; blur client data)" },
-    { src: "/images/IMG-02.jpg", code: "IMG-02", hint: "Search / event list\n(only if permitted)" },
-    { src: "/images/IMG-03.png", code: "IMG-03", hint: "Sign-in or billing screen\n(test data only)" },
+    { src: "/images/IMG-01.jpg", code: "IMG-01", alt: "Platform home page with featured and newly added events", hint: "Main screen\n(only if permitted; blur client data)" },
+    { src: "/images/IMG-02.jpg", code: "IMG-02", alt: "Event search results with a refine-search sidebar", hint: "Search / event list\n(only if permitted)" },
+    { src: "/images/IMG-03.png", code: "IMG-03", alt: "Sign-in page with Google and Facebook social login", hint: "Sign-in or billing screen\n(test data only)" },
   ] satisfies ShotData[],
   scope: [
     { title: "Data Ingestion", text: "Crawlers integrating 10+ third-party sources, for both JavaScript-rendered and static sites." },
@@ -179,12 +181,18 @@ export const projects: {
     tags: ["C#", "Web Forms", "WinForms", "WPF", "VB.NET", "SQL Server"],
   },
   {
+    company: "Freelance · Desktop",
+    years: "2019 – 2021",
+    title: "Real-time Training Simulator",
+    text: "Two versions of a desktop training simulator with real-time custom GDI+ rendering and a hardware control panel over a serial port, designed and implemented independently. Client details are confidential.",
+    tags: ["C#", "WinForms", "GDI+", "Serial Port"],
+  },
+  {
     company: "FPT Telecom",
     years: "2021",
     title: "Enterprise HR Platform",
     text: "Onsite full-stack developer within a 22-person cross-functional team, responsible for design, feature development and unit testing.",
     tags: ["ASP.NET Core", "Web Forms", "SQL Server", "SVN"],
-    shot: { src: "/images/IMG-05.png", code: "IMG-05", hint: "HR platform\n(only if permitted)" },
   },
   {
     company: "Freelance · Solo",
@@ -192,14 +200,6 @@ export const projects: {
     title: "Recruitment Platform",
     text: "Designed, built, tested and deployed a recruitment website end-to-end as the sole developer.",
     tags: ["ASP.NET Core", "RESTful API", "SQL Server"],
-    shot: { src: "/images/IMG-06.png", code: "IMG-06", hint: "Recruitment platform\nhome or job listing page" },
-  },
-  {
-    company: "Freelance · Desktop",
-    years: "2019 – 2021",
-    title: "Real-time Training Simulator",
-    text: "Two versions of a desktop training simulator with real-time custom GDI+ rendering and a hardware control panel over a serial port, designed and implemented independently. Client details are confidential.",
-    tags: ["C#", "WinForms", "GDI+", "Serial Port"],
   },
 ];
 
@@ -218,7 +218,7 @@ export const career = [
   {
     company: "Freelance",
     position: ".NET Developer · alongside main role",
-    dates: "Feb 2021 – Apr 2023",
+    dates: "2019 – Apr 2023",
     points: ["Delivered web and desktop applications for Vietnamese clients, from design through deployment"],
   },
   {

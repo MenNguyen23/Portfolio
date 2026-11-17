@@ -1,14 +1,14 @@
 @page { size:A4; margin:0; }
 * { box-sizing:border-box; margin:0; padding:0; }
-:root { --navy:#0f2747; --navy2:#1b3d6b; --teal:#0e8a8c; --teal-soft:#e4f3f3;
+:root { --navy:#0f2747; --navy2:#1b3d6b; --teal:#0e8a8c; --teal-text:#0b7476; --teal-soft:#e4f3f3;
         --ink:#1c2530; --body:#3a4553; --muted:#6b7684; --line:#e2e7ee; --soft:#f5f7fa; }
 body { font-family:var(--font-inter),'Inter','Segoe UI',Arial,sans-serif; color:var(--ink); background:#cfd5dd; font-size:9.3pt; line-height:1.5;
        -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
 /* Screen: A4-width sheet that grows with its content. Print: exact A4 pages (see @media print). */
-.page { width:210mm; min-height:297mm; margin:10mm auto; background:#fff; position:relative; overflow:hidden; page-break-after:always; break-after:page;
+.page { width:210mm; min-height:297mm; margin:10mm auto; background:#fff; position:relative; overflow:hidden;
         box-shadow:0 1px 3px rgba(15,39,71,.08), 0 8px 24px rgba(15,39,71,.08); }
-.page:last-of-type { page-break-after:auto; break-after:auto; }
+.page + .page { page-break-before:always; break-before:page; }
 @media print { body{background:#fff} .page{margin:0; height:297mm; min-height:0; box-shadow:none} }
 .wrap { padding:12mm 14mm; }
 
@@ -28,7 +28,7 @@ body:not(.draft) .shot.empty { display:none; }
 body:not(.draft) .gallery-sec:not(:has(.shot:not(.empty))) { display:none; }
 
 /* ---------- shared ---------- */
-.eyebrow { font-size:7.3pt; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--teal); }
+.eyebrow { font-size:7.3pt; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--teal-text); }
 h2 { font-size:10pt; font-weight:800; letter-spacing:1.4px; text-transform:uppercase; color:var(--navy);
      display:flex; align-items:center; gap:3mm; margin-bottom:3mm; }
 h2::after { content:""; flex:1; height:1px; background:var(--line); }
@@ -66,7 +66,7 @@ h3 { color:var(--navy); }
 /* ---------- page 2 ---------- */
 .case { background:linear-gradient(120deg,var(--navy),var(--navy2)); color:#fff; border-radius:3.5mm; padding:6mm 6.5mm 5.5mm; margin-bottom:5mm; }
 .case .eyebrow { color:#8fd3d3; }
-.case h1 { font-size:15.5pt; font-weight:800; margin:1.2mm 0 3mm; line-height:1.2; }
+.case h3 { color:#fff; font-size:15.5pt; font-weight:800; margin:1.2mm 0 3mm; line-height:1.2; }
 .case .facts { display:grid; grid-template-columns:repeat(4,1fr); gap:3mm; border-top:1px solid rgba(255,255,255,.18); padding-top:3mm; }
 .case .facts div { font-size:7.2pt; color:#b9c8da; text-transform:uppercase; letter-spacing:.8px; }
 .case .facts b { display:block; font-size:8.6pt; color:#fff; text-transform:none; letter-spacing:0; font-weight:600; margin-top:.8mm; }
@@ -81,7 +81,7 @@ h3 { color:var(--navy); }
 
 .scope { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; }
 .sc { border:1px solid var(--line); border-radius:2.5mm; padding:3.5mm; }
-.sc .num { font-size:7.3pt; font-weight:800; color:var(--teal); letter-spacing:1px; }
+.sc .num { font-size:7.3pt; font-weight:800; color:var(--teal-text); letter-spacing:1px; }
 .sc h3 { font-size:9.4pt; margin:0.6mm 0 1mm; }
 .sc p { font-size:8.2pt; color:var(--body); line-height:1.4; }
 
@@ -93,16 +93,16 @@ h3 { color:var(--navy); }
 .dd:last-child { margin-bottom:0; }
 .dd h3 { font-size:10.5pt; margin:0.8mm 0 1mm; }
 .dd .row { display:grid; grid-template-columns:19mm 1fr; gap:2mm; margin-top:1.8mm; }
-.dd .row b { font-size:7.2pt; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--teal); padding-top:.5mm; }
+.dd .row b { font-size:7.2pt; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--teal-text); padding-top:.5mm; }
 .dd .row p { font-size:8.5pt; color:var(--body); line-height:1.45; }
 
 .mini { background:var(--soft); border-radius:2.5mm; padding:3mm; display:flex; flex-direction:column; align-items:stretch; justify-content:center; gap:0.8mm; }
-.mini .lbl { font-size:6.8pt; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--muted); text-align:center; margin-bottom:1mm; }
+.mini .lbl { font-size:6.8pt; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#5d6876; text-align:center; margin-bottom:1mm; }
 .mini .n { background:#fff; border:1px solid var(--line); border-radius:1.8mm; padding:1.5mm 2mm; text-align:center; font-size:7.8pt; font-weight:600; color:var(--navy); line-height:1.3; }
 .mini .n small { display:block; font-size:6.8pt; font-weight:500; color:var(--muted); }
 .mini .n.hl { background:var(--navy); color:#fff; border-color:var(--navy); }
 .mini .n.hl small { color:#b9c8da; }
-.mini .a { text-align:center; color:var(--teal); font-weight:800; font-size:8pt; line-height:1; }
+.mini .a { text-align:center; color:var(--teal-text); font-weight:800; font-size:8pt; line-height:1; }
 
 /* ---------- page 4 ---------- */
 .projects { display:grid; grid-template-columns:1fr 1fr; gap:4mm; }
@@ -126,7 +126,7 @@ h3 { color:var(--navy); }
 .ti::before { content:""; position:absolute; left:-7mm; top:1.2mm; width:3mm; height:3mm; border-radius:50%; background:#fff; border:2px solid var(--teal); }
 .ti.now::before { background:var(--teal); }
 .ti .co { font-weight:700; font-size:9.6pt; }
-.ti .pos { font-size:8.6pt; color:var(--teal); font-weight:600; }
+.ti .pos { font-size:8.6pt; color:var(--teal-text); font-weight:600; }
 .ti .dt { font-size:8.2pt; color:var(--muted); text-align:right; padding-top:.5mm; }
 .ti ul { list-style:none; margin-top:1.2mm; }
 .ti ul li { position:relative; padding-left:4mm; font-size:8.3pt; color:var(--body); line-height:1.45; margin-bottom:0.8mm; }
@@ -204,7 +204,7 @@ h3 { color:var(--navy); }
   .tb-row b, .ti .pos, .ti .dt, .proj .yr { font-size:10pt; }
   .ti .co { font-size:11pt; }
   .dd .row b, .sc .num, .mini .lbl { font-size:8.5pt; }
-  .case h1 { font-size:16pt; }
+  .case h3 { font-size:16pt; }
   .case .facts div { font-size:8.5pt; }
   .case .facts b { font-size:10pt; }
   .mini .n { font-size:9.5pt; }
@@ -215,11 +215,13 @@ h3 { color:var(--navy); }
 /* =====================================================================
    Motion & interaction (screen only)
    ===================================================================== */
-::selection { background:var(--teal); color:#fff; }
+::selection { background:var(--teal-text); color:#fff; }
 html { scroll-behavior:smooth; }
 .hero .links a { color:inherit; text-decoration:none; background:linear-gradient(currentColor,currentColor) 0 100% / 0 1px no-repeat;
                  transition:background-size .3s ease, color .2s; }
 .hero .links a:hover { color:#fff; background-size:100% 1px; }
+.hero .links a { display:inline-block; padding:4px 0; margin:-4px 0; }
+.hero .links a:focus-visible { outline:2px solid #8fd3d3; outline-offset:3px; border-radius:2px; color:#fff; }
 
 /* ---- scroll progress + back to top ---- */
 .progress { position:fixed; inset:0 0 auto 0; height:3px; z-index:50; pointer-events:none; }
@@ -241,8 +243,8 @@ html { scroll-behavior:smooth; }
 .dd:hover { box-shadow:0 10px 30px rgba(15,39,71,.08); border-color:#bcd9da; }
 .tb-row:hover { background:var(--soft); }
 .tb-row b { transition:color .2s; }
-.tb-row:hover b { color:var(--teal); }
-.tag:hover { background:var(--teal); color:#fff; transform:translateY(-1px); }
+.tb-row:hover b { color:var(--teal-text); }
+.tag:hover { background:var(--teal-text); color:#fff; transform:translateY(-1px); }
 .sc .num { transition:letter-spacing .3s; }
 .sc:hover .num { letter-spacing:2.5px; }
 
@@ -342,11 +344,12 @@ html { scroll-behavior:smooth; }
 /* ---- save as PDF button ---- */
 .pdf-btn { position:fixed; right:20px; top:18px; z-index:50; height:40px; padding:0 16px 0 13px; border:none; border-radius:20px;
   display:inline-flex; align-items:center; gap:7px; font:600 13px/1 var(--font-inter, Inter), sans-serif; letter-spacing:.3px;
-  color:#fff; background:var(--teal); cursor:pointer; box-shadow:0 6px 20px rgba(15,39,71,.25);
+  color:#fff; background:var(--teal-text); cursor:pointer; box-shadow:0 6px 20px rgba(15,39,71,.25);
   transition:background .2s, transform .2s, box-shadow .2s; }
 .pdf-btn:hover { background:var(--navy); transform:translateY(-2px); box-shadow:0 10px 26px rgba(15,39,71,.3); }
 .pdf-btn:focus-visible { outline:3px solid #8fd3d3; outline-offset:2px; }
-@media screen and (max-width: 600px) { .pdf-btn { top:auto; bottom:20px; right:auto; left:16px; } }
+/* below 860px the sheet is fluid and the top-right corner overlaps the hero, so move the button down */
+@media screen and (max-width: 860px) { .pdf-btn { top:auto; bottom:20px; right:auto; left:16px; } }
 
 /* ---- print: no chrome, no motion, everything visible ---- */
 @media print {
@@ -356,3 +359,6 @@ html { scroll-behavior:smooth; }
   h2::after, .timeline::before { transform:none !important; }
   .hero::before, .case::before, .ti.now::after { display:none; }
 }
+
+/* visually hidden, still read by screen readers */
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }

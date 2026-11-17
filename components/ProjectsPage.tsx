@@ -5,7 +5,7 @@ import Tags from "./Tags";
 /** Page 4 · More projects */
 export default function ProjectsPage() {
   return (
-    <section className="page">
+    <section className="page" aria-label="More projects">
       <div className="wrap">
         <h2>More Projects</h2>
         <div className="projects" data-reveal="stagger">

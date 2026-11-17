@@ -6,12 +6,12 @@ import CareerPage from "@/components/CareerPage";
 
 export default function Home() {
   return (
-    <>
+    <main>
       <IntroPage />
       <FeaturedPage />
       <DeepDivesPage />
       <ProjectsPage />
       <CareerPage />
-    </>
+    </main>
   );
 }

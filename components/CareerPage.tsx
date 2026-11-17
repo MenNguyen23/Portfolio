@@ -3,7 +3,7 @@ import { career } from "@/data/portfolio";
 /** Page 5 · Career */
 export default function CareerPage() {
   return (
-    <section className="page">
+    <section className="page" aria-label="Career">
       <div className="wrap">
         <div className="sec">
           <h2>Career</h2>

@@ -5,7 +5,7 @@ import CountUp from "./effects/CountUp";
 /** Page 1 · Intro */
 export default function IntroPage() {
   return (
-    <section className="page">
+    <section className="page" aria-label="Introduction">
       <header className="hero">
         <h1>{profile.name}</h1>
         <div className="role">{profile.role}</div>

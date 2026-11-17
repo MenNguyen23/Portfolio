@@ -4,7 +4,7 @@ import { deepDives } from "@/data/portfolio";
 /** Page 3 · Engineering deep dives */
 export default function DeepDivesPage() {
   return (
-    <section className="page">
+    <section className="page" aria-label="Engineering deep dives">
       <div className="wrap">
         <h2>Engineering Deep Dives</h2>
 
@@ -31,7 +31,7 @@ export default function DeepDivesPage() {
               <div className="lbl">Approach (generic)</div>
               {d.flow.map((n, i) => (
                 <Fragment key={n.label}>
-                  {i > 0 && <div className="a">↓</div>}
+                  {i > 0 && <div className="a" aria-hidden="true">↓</div>}
                   <div className={`n${n.highlight ? " hl" : ""}`}>
                     {n.label}
                     {n.sub && <small>{n.sub}</small>}

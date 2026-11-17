@@ -43,5 +43,13 @@ export default function CountUp({ value, duration = 1400 }: { value: string; dur
     };
   }, [value, duration]);
 
-  return <span ref={ref}>{value}</span>;
+  // The animated digits are hidden from screen readers; they read the final value instead.
+  return (
+    <>
+      <span ref={ref} aria-hidden="true">
+        {value}
+      </span>
+      <span className="sr-only">{value}</span>
+    </>
+  );
 }
