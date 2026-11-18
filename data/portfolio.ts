@@ -9,7 +9,7 @@ export const DRAFT = false;
 
 export const profile = {
   name: "Nguyen Thi Men",
-  role: ".NET Developer · 7 years",
+  role: ".NET Developer",
   tagline:
     "Full-stack .NET experience, strongest on the back end: async messaging, third-party integrations, sign-in and payments.",
   links: [
