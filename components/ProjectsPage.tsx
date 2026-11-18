@@ -19,6 +19,12 @@ export default function ProjectsPage() {
                 </div>
                 <h3>{p.title}</h3>
                 <p>{p.text}</p>
+                {p.link && (
+                  <a className="proj-link" href={p.link.href} target="_blank" rel="noopener noreferrer">
+                    {p.link.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                )}
                 <Tags items={p.tags} />
               </div>
             </div>

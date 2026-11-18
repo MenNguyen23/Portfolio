@@ -24,10 +24,8 @@ export default function IntroPage() {
         <div className="sec">
           <h2>About</h2>
           <p className="lead" data-reveal="up">
-            .NET developer with <b>7 years</b> of experience in C# back-end systems, from enterprise applications for
-            Japanese clients to a production <b>multi-tenant SaaS platform</b> for an Australian client, where I am the
-            primary back-end developer. I work directly with international product teams in English to clarify
-            requirements and deliver technical updates.
+            .NET developer with <b>7 years</b> of experience. I currently work on the back end of a{" "}
+            <b>multi-tenant SaaS platform</b> for an Australian client.
           </p>
         </div>
 

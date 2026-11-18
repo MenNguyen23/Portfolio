@@ -1,4 +1,4 @@
-@page { size:A4; margin:0; }
+﻿@page { size:A4; margin:0; }
 * { box-sizing:border-box; margin:0; padding:0; }
 :root { --navy:#0f2747; --navy2:#1b3d6b; --teal:#0e8a8c; --teal-text:#0b7476; --teal-soft:#e4f3f3;
         --ink:#1c2530; --body:#3a4553; --muted:#6b7684; --line:#e2e7ee; --soft:#f5f7fa; }
@@ -79,7 +79,7 @@ h3 { color:var(--navy); }
 .gallery { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; }
 .gallery .shot { height:40mm; }
 
-.scope { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; }
+.scope { display:grid; grid-template-columns:repeat(2,1fr); gap:3mm; }
 .sc { border:1px solid var(--line); border-radius:2.5mm; padding:3.5mm; }
 .sc .num { font-size:7.3pt; font-weight:800; color:var(--teal-text); letter-spacing:1px; }
 .sc h3 { font-size:9.4pt; margin:0.6mm 0 1mm; }
@@ -138,12 +138,6 @@ h3 { color:var(--navy); }
 .quote p { font-size:9.4pt; color:var(--ink); padding-left:6mm; font-style:italic; line-height:1.55; }
 .quote .by { font-size:8pt; color:var(--muted); margin-top:2mm; padding-left:6mm; }
 
-.cta { background:linear-gradient(120deg,var(--navy),var(--navy2)); color:#fff; border-radius:3.5mm; padding:7mm 7mm;
-       display:grid; grid-template-columns:1fr auto; gap:6mm; align-items:center; }
-.cta h3 { color:#fff; font-size:14pt; }
-.cta p { font-size:8.8pt; color:#c9d6e6; margin-top:1mm; }
-.cta .c { font-size:8.6pt; color:#dbe4ef; line-height:1.8; text-align:right; }
-.cta .c b { color:#fff; margin-right:1.5mm; }
 
 /* =====================================================================
    Responsive (screen only — print keeps the exact A4 layout above)
@@ -362,3 +356,9 @@ html { scroll-behavior:smooth; }
 
 /* visually hidden, still read by screen readers */
 .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+/* Live project link on a project card */
+.proj-link{display:inline-block;align-self:flex-start;width:fit-content;margin:-2px 0 10px;font-size:9.5pt;font-weight:600;color:var(--teal-text);text-decoration:none;border-bottom:1px solid currentColor}
+.proj-link:hover{opacity:.8}
+.proj-link:focus-visible{outline:2px solid var(--teal-text);outline-offset:2px;border-radius:2px}
+

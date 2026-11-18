@@ -1,5 +1,4 @@
 import { featured } from "@/data/portfolio";
-import Shot from "./Shot";
 
 /** Page 2 · Featured project */
 export default function FeaturedPage() {
@@ -28,15 +27,6 @@ export default function FeaturedPage() {
               <p>{o.v}</p>
             </div>
           ))}
-        </div>
-
-        <div className="sec gallery-sec">
-          <h2>Screenshots</h2>
-          <div className="gallery" data-reveal="stagger">
-            {featured.screenshots.map((s) => (
-              <Shot key={s.code} {...s} />
-            ))}
-          </div>
         </div>
 
         <div className="sec">
