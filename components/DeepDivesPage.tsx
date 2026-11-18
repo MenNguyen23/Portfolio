@@ -1,9 +1,6 @@
 import { Fragment } from "react";
 import { deepDives } from "@/data/portfolio";
 
-/** Deep dives per printed A4 page; three no longer fit on one sheet. */
-const PER_PAGE = 2;
-
 type DeepDive = (typeof deepDives)[number];
 
 function DeepDiveCard({ d }: { d: DeepDive }) {
@@ -50,23 +47,17 @@ function DeepDiveCard({ d }: { d: DeepDive }) {
   );
 }
 
-/** Page 3+ · Engineering deep dives, split across as many A4 pages as needed */
-export default function DeepDivesPage() {
-  const pages: DeepDive[][] = [];
-  for (let i = 0; i < deepDives.length; i += PER_PAGE) pages.push(deepDives.slice(i, i + PER_PAGE));
-
+/**
+ * Engineering deep dives from index `from` to `to` (exclusive), as a block rather than a page,
+ * so the page layout in app/page.tsx decides how they share printed A4 sheets.
+ */
+export function DeepDivesSection({ from = 0, to, continued = false }: { from?: number; to?: number; continued?: boolean }) {
   return (
-    <>
-      {pages.map((group, p) => (
-        <section className="page" aria-label={p === 0 ? "Engineering deep dives" : "Engineering deep dives, continued"} key={p}>
-          <div className="wrap">
-            <h2>{p === 0 ? "Engineering Deep Dives" : "Engineering Deep Dives · continued"}</h2>
-            {group.map((d) => (
-              <DeepDiveCard d={d} key={d.title} />
-            ))}
-          </div>
-        </section>
+    <div className="dd-sec">
+      <h2>{continued ? "Engineering Deep Dives · continued" : "Engineering Deep Dives"}</h2>
+      {deepDives.slice(from, to).map((d) => (
+        <DeepDiveCard d={d} key={d.title} />
       ))}
-    </>
+    </div>
   );
 }

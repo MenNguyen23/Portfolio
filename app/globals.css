@@ -365,3 +365,28 @@ html { scroll-behavior:smooth; }
 .proj-link:hover{opacity:.8}
 .proj-link:focus-visible{outline:2px solid var(--teal-text);outline-offset:2px;border-radius:2px}
 
+
+/* ---------- experience & projects ---------- */
+.xp-proj { border:1px solid var(--line); border-left:2.5px solid var(--navy); border-radius:2mm; padding:3mm 3.5mm; margin-top:2.2mm; }
+.xp-proj h3 { font-size:9.6pt; }
+.xp-ctx { font-size:7.8pt; color:var(--muted); margin-top:.4mm; }
+.xp-proj dl { display:grid; grid-template-columns:16mm 1fr; gap:1.4mm 2mm; margin-top:2mm; }
+.xp-proj dt { font-size:7pt; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--teal-text); padding-top:.4mm; }
+.xp-proj dd { font-size:8.3pt; color:var(--body); line-height:1.45; margin:0; }
+.xp-proj dd ul { margin:0; }
+.xp-proj dd li + li { margin-top:.5mm; }
+.xp-proj .proj-link { margin:0; font-size:8.3pt; }
+.xp-note { color:var(--muted); }
+@media screen and (max-width:600px) {
+  .xp-proj dd, .xp-proj .proj-link { font-size:10.5pt; }
+  .xp-proj h3 { font-size:11.5pt; }
+  .xp-proj dl { grid-template-columns:1fr; gap:.4mm; }
+  .xp-proj dd { margin-bottom:1.2mm; }
+}
+.dd-sec + .xp-sec { margin-top:7mm; }
+.ti.xp { display:block; }
+.xp-head { display:flex; justify-content:space-between; align-items:flex-start; gap:4mm; }
+@media screen and (max-width:600px) {
+  .xp-head { flex-direction:column-reverse; gap:.5mm; }
+  .xp-head .dt { text-align:left; }
+}

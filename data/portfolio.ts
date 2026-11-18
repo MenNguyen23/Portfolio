@@ -7,21 +7,11 @@
  */
 export const DRAFT = false;
 
-export type ShotData = {
-  /** Path under /public, e.g. "/images/IMG-01.jpg". A ".png" path falls back to ".jpg" automatically. */
-  src: string;
-  code: string;
-  /** Placeholder hint, lines separated by "\n" */
-  hint: string;
-  /** Describes what the screenshot shows, for screen readers */
-  alt: string;
-};
-
 export const profile = {
   name: "Nguyen Thi Men",
-  role: ".NET Developer",
+  role: ".NET Developer · 7 years",
   tagline:
-    "I mostly work on the back end: async messaging, third-party integrations, sign-in and payments.",
+    "Full-stack .NET experience, strongest on the back end: async messaging, third-party integrations, sign-in and payments.",
   links: [
     { label: "Email", value: "ntmen98@gmail.com", href: "mailto:ntmen98@gmail.com" },
     { label: "Phone", value: "(+84) 868 647 331", href: "tel:+84868647331" },
@@ -173,84 +163,101 @@ export const deepDives: {
   },
 ];
 
-export const projects: {
-  company: string;
-  years: string;
-  title: string;
-  text: string;
-  tags: string[];
-  shot?: ShotData;
-  wide?: boolean;
-  /** Public URL of the live project, if any */
-  link?: { label: string; href: string };
-}[] = [
-  {
-    company: "RYOMO Vietnam Solutions",
-    years: "2019 – 2021",
-    title: "Enterprise Gas Management System",
-    text: "Multiple phases of an enterprise system for a Japanese client across four technology stacks. Design, coding, unit testing, maintenance and troubleshooting.",
-    tags: ["C#", "Web Forms", "WinForms", "WPF", "VB.NET", "SQL Server"],
-  },
-  {
-    company: "Freelance · Desktop",
-    years: "2019 – 2021",
-    title: "Real-time Training Simulator",
-    text: "Two versions of a desktop training simulator with real-time custom GDI+ rendering and a hardware control panel over a serial port, designed and implemented independently. Client details are confidential.",
-    tags: ["C#", "WinForms", "GDI+", "Serial Port"],
-  },
-  {
-    company: "FPT Telecom",
-    years: "2021",
-    title: "Enterprise HR Platform",
-    text: "Onsite full-stack developer within a 22-person cross-functional team, responsible for design, feature development and unit testing on ASP.NET Web Forms.",
-    tags: ["ASP.NET Web Forms", "SQL Server", "SVN"],
-  },
-  {
-    company: "HPT Vietnam · Freelance",
-    years: "2021 – 2023",
-    title: "Careers Website & Admin CMS",
-    text: "Bilingual (Vietnamese / English) careers website for an IT services company, with a separate admin portal for managing job postings, news, videos and site content. Layered ASP.NET Core solution built in a small team.",
-    link: { label: "career.hpt.vn", href: "https://career.hpt.vn/" },
-    tags: ["ASP.NET Core MVC", "Entity Framework Core", "ASP.NET Core Identity", "SQL Server"],
-  },
-];
+export type ProjectEntry = {
+  name: string;
+  /** Who the product was for, and when */
+  context: string;
+  role: string;
+  tasks: string[];
+  tech: string[];
+  /** Live product link, an in-page link, or a note when the product can't be shown */
+  product: { label: string; href?: string; note?: string };
+};
 
-export const career = [
+export const experience: {
+  company: string;
+  position: string;
+  dates: string;
+  current?: boolean;
+  projects: ProjectEntry[];
+}[] = [
   {
     company: "Groove Technology",
     position: "Back-End .NET Developer",
     dates: "Apr 2022 – Present",
     current: true,
-    points: [
-      "Main back-end developer of a production multi-tenant SaaS platform for an Australian client",
-      "Write back-end specs and take features through AI-assisted implementation and production support, with code review from the tech lead",
-      "Built 50+ event source crawlers, shared-feed features, MFA and subscription billing",
-      "Worked directly with the client's product team",
+    projects: [
+      {
+        name: "Multi-tenant SaaS Platform for the Events Industry",
+        context: "Australian client · Apr 2022 – Present · team of 5",
+        role: "Main back-end developer, with code review from the tech lead",
+        tasks: [
+          "Write back-end specs with the client's product team and take features through AI-assisted implementation and production support",
+          "Built 50+ event source crawlers and maintain 100+ more",
+          "Built shared-feed features, Microsoft and Apple sign-in, administrator MFA, per-tenant roles and subscription billing",
+        ],
+        tech: ["C#", ".NET Framework 4.8", "ASP.NET MVC 5", "Web API", "WCF", "NServiceBus", "RavenDB", "Selenium", "Stripe", "AWS"],
+        product: { label: "Featured Project & Deep Dives", href: "#featured", note: "live product under NDA" },
+      },
     ],
   },
   {
     company: "Freelance",
     position: ".NET Developer · alongside main role",
     dates: "2019 – Apr 2023",
-    points: ["Delivered web and desktop applications for Vietnamese clients, from design through deployment"],
+    projects: [
+      {
+        name: "Careers Website & Admin CMS",
+        context: "HPT Vietnam · 2021 – 2023 · small team",
+        role: "Developer",
+        tasks: [
+          "Bilingual (Vietnamese / English) careers website for an IT services company",
+          "Admin portal for job postings, news, videos and site content, on a layered ASP.NET Core solution",
+        ],
+        tech: ["C#", "ASP.NET Core MVC", "Entity Framework Core", "ASP.NET Core Identity", "SQL Server"],
+        product: { label: "career.hpt.vn", href: "https://career.hpt.vn/" },
+      },
+      {
+        name: "Real-time Training Simulator",
+        context: "Private client · 2019 – 2021 · two versions",
+        role: "Sole developer: design and implementation",
+        tasks: [
+          "Real-time custom rendering of the simulator display",
+          "Hardware control panel connected over a serial port",
+        ],
+        tech: ["C#", "WinForms", "GDI+", "Serial Port"],
+        product: { label: "Desktop application", note: "client confidential" },
+      },
+    ],
   },
   {
     company: "FPT Telecom Joint Stock Company",
     position: "Onsite Full-Stack Developer",
     dates: "Apr 2021 – Sep 2021",
-    points: [
-      "Developed features for an enterprise HR platform in a 22-person cross-functional team",
-      "Covered design, coding and unit testing with ASP.NET Web Forms",
+    projects: [
+      {
+        name: "Enterprise HR Platform",
+        context: "FPT Telecom · 22-person cross-functional team",
+        role: "Full-stack developer",
+        tasks: ["Design, feature development and unit testing"],
+        tech: ["C#", "ASP.NET Web Forms", "SQL Server", "SVN"],
+        product: { label: "Internal system", note: "not public" },
+      },
     ],
   },
   {
     company: "RYOMO Vietnam Solutions",
     position: ".NET Developer",
     dates: "Aug 2019 – Mar 2021",
-    points: [
-      "Delivered multiple phases of an enterprise system for a Japanese client",
-      "Worked across ASP.NET Web Forms, WinForms, WPF and VB.NET / VB6 with SQL Server",
-      "Handled maintenance and troubleshooting",
+    projects: [
+      {
+        name: "Enterprise Gas Management System",
+        context: "Japanese client · multiple phases",
+        role: "Developer",
+        tasks: ["Design, coding, unit testing, maintenance and troubleshooting across four technology stacks"],
+        tech: ["C#", "VB.NET / VB6", "ASP.NET Web Forms", "WinForms", "WPF", "SQL Server"],
+        product: { label: "Enterprise system", note: "client confidential" },
+      },
     ],
   },
 ];

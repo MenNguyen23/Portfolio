@@ -36,10 +36,17 @@ export default function CountUp({ value, duration = 1400 }: { value: string; dur
     );
     io.observe(el);
 
-    return () => {
+    // Printing or saving as PDF mid-count would capture a partial number: jump to the final value.
+    const finish = () => {
       io.disconnect();
       cancelAnimationFrame(raf);
       el.textContent = value;
+    };
+    window.addEventListener("beforeprint", finish);
+
+    return () => {
+      window.removeEventListener("beforeprint", finish);
+      finish();
     };
   }, [value, duration]);
 

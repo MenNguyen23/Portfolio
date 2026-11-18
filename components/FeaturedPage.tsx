@@ -3,7 +3,7 @@ import { featured } from "@/data/portfolio";
 /** Page 2 · Featured project */
 export default function FeaturedPage() {
   return (
-    <section className="page" aria-label="Featured project">
+    <section className="page" id="featured" aria-label="Featured project">
       <div className="wrap">
         <h2>Featured Project</h2>
 
