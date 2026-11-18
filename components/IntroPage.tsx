@@ -25,7 +25,8 @@ export default function IntroPage() {
           <h2>About</h2>
           <p className="lead" data-reveal="up">
             .NET developer with <b>7 years</b> of experience. I currently work on the back end of a{" "}
-            <b>multi-tenant SaaS platform</b> for an Australian client.
+            <b>multi-tenant SaaS platform</b> for an Australian client. I work spec-first and implement with an{" "}
+            <b>AI coding agent</b>, keeping review and verification in my own hands.
           </p>
         </div>
 

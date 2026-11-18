@@ -31,39 +31,38 @@ export const profile = {
 
 export const stats = [
   { n: "7+", l: "Years of .NET / C# development" },
-  { n: "10+", l: "Third-party data sources integrated" },
-  { n: "10+", l: "Projects delivered, web & desktop" },
+  { n: "50+", l: "Event source crawlers built, 100+ maintained" },
   { n: "3", l: "Client markets: Vietnam, Japan, Australia" },
 ];
 
 export const areas = [
   {
     title: "Async Processing & Integration",
-    text: "Message-driven services and pipelines that ingest, deduplicate and index external data.",
+    text: "Message-driven services and pipelines that crawl, queue and index external data.",
     tags: ["NServiceBus", "MSMQ", "Selenium WebDriver"],
   },
   {
     title: "Cloud & Search",
-    text: "Object storage and full-text search in a production SaaS platform.",
-    tags: ["Amazon S3", "Amazon OpenSearch Service"],
+    text: "Object storage, centralised logging and full-text event search in a production SaaS platform.",
+    tags: ["Amazon S3", "AWS CloudWatch", "Full-text search"],
   },
   {
     title: "Identity & Security",
-    text: "Social and enterprise sign-in, MFA and per-tenant authorization.",
-    tags: ["OAuth 2.0 / OIDC", "Microsoft Entra ID", "TOTP MFA (Google Authenticator)"],
+    text: "Social and Microsoft sign-in, MFA and per-tenant authorization.",
+    tags: ["OAuth 2.0 / OIDC", "Microsoft Entra ID", "Sign in with Apple", "TOTP MFA"],
   },
   {
     title: "Payments & Billing",
-    text: "Multi-tenant payments and the full subscription lifecycle.",
-    tags: ["Stripe Connect", "Stripe Checkout", "Webhooks"],
+    text: "Per-tenant subscriptions and the full billing lifecycle.",
+    tags: ["Stripe Billing", "Stripe Checkout & Customer Portal", "Webhooks"],
   },
 ];
 
 export const toolbox = [
   { k: "Core", v: "C#, .NET Framework 4.8, ASP.NET Core, ASP.NET MVC 5, ASP.NET Web API, WCF" },
   { k: "Data & Messaging", v: "SQL Server, RavenDB, SQLite, MySQL, Entity Framework Core, Dapper, NServiceBus, MSMQ" },
-  { k: "Architecture & Patterns", v: "SOA, Event-Driven, Multi-tenancy, Dependency Injection, Repository, Strategy, Command, Pipeline" },
-  { k: "DevOps & Tooling", v: "TeamCity (CI/CD), Git, GitHub, GitLab, TFS, SVN, Jira, log4net, Windows Server" },
+  { k: "Architecture", v: "Message-driven back ends, multi-tenant SaaS, service-oriented (WCF / Web API) systems, dependency injection" },
+  { k: "DevOps & Tooling", v: "TeamCity (CI/CD), Git, GitHub, GitLab, Jira, log4net, Windows Server, AI coding agents (spec-driven)" },
   { k: "Front-End & Desktop", v: "Razor, HTML, CSS, JavaScript, jQuery, Bootstrap, WPF, WinForms, GDI+" },
 ];
 
@@ -71,7 +70,7 @@ export const featured = {
   eyebrow: "Groove Technology · Australian Client",
   title: "Multi-tenant SaaS Platform for the Events Industry",
   facts: [
-    { k: "Role", v: "Primary Back-End Developer" },
+    { k: "Role", v: "Main Back-End Developer" },
     { k: "Period", v: "Apr 2022 – Present" },
     { k: "Team", v: "5 · PM, TL, BE, FE, QC" },
     { k: "Stack", v: "C# · .NET" },
@@ -83,7 +82,7 @@ export const featured = {
     },
     {
       k: "My role",
-      v: "Joined a platform already in production and took ownership of back-end development: new features, maintenance and troubleshooting.",
+      v: "Main back-end developer on a platform already in production. I clarify business rules with the product team, write the back-end spec with its edge cases, then take the feature through AI-assisted implementation, verification and production support, with code review and technical direction from the team's tech lead.",
     },
     {
       k: "Collaboration",
@@ -91,10 +90,10 @@ export const featured = {
     },
   ],
   scope: [
-    { title: "Data Ingestion", text: "Crawlers for 10+ third-party sources, with background processing through a message queue." },
-    { title: "Search & Storage", text: "Full-text event search and cloud file storage." },
-    { title: "Identity & Access", text: "Single sign-on, multi-factor authentication and roles configurable per tenant." },
-    { title: "Payments", text: "Per-tenant payments and the full subscription lifecycle." },
+    { title: "Data Ingestion", text: "Built 50+ source crawlers and maintained 100+ more, with background processing through a message queue." },
+    { title: "Multi-tenancy", text: "Features on the shared-feed model: user-posted events in feeds, a multi-feed planning calendar and access requests." },
+    { title: "Identity & Access", text: "Microsoft and Apple sign-in, administrator MFA and roles configurable per tenant." },
+    { title: "Payments", text: "Per-tenant subscriptions, with member roles driven by billing events." },
   ],
   nda: "Client project under NDA. The client's name, internal architecture and business figures are intentionally omitted, and solutions are described at a general level. Further technical details and references are available on request.",
 };
@@ -105,54 +104,71 @@ export const deepDives: {
   eyebrow: string;
   title: string;
   problem: string;
-  approach: string;
+  myPart: string;
+  decisions: string[];
   outcome: string;
   flow: FlowNode[];
 }[] = [
   {
-    eyebrow: "Challenge 01 · Data Pipeline",
-    title: "Ingesting events from 10+ different sources",
+    eyebrow: "Challenge 01 · Data Ingestion",
+    title: "Building and running 50+ event crawlers",
     problem:
-      "Some sources render content with JavaScript, others serve static HTML, and the same event can appear in several sources.",
-    approach:
-      "A crawler per source type (headless browser or plain HTTP) publishes messages to a queue; separate background handlers deduplicate, index and store the events.",
-    outcome: "Crawling is decoupled from indexing and storage, which run asynchronously in the background.",
+      "Source sites change their markup without notice, some render with JavaScript, some block automated traffic, and headless browser crawls broke whenever Chrome updated itself.",
+    myPart:
+      "Built 50+ source crawlers and maintained 100+ more on the platform's existing pipeline: listing and detail spiders run as separate queued messages, and duplicates are matched on text similarity.",
+    decisions: [
+      "Cheapest fetch first, chosen per source: plain HTTP, then a managed scraping service when a site blocks requests, and headless Chrome only for JavaScript-rendered pages.",
+      "Made the headless browser set-up independent of the installed Chrome version, so browser auto-updates no longer break crawls.",
+      "Image downloads blocked at the source's edge are retried through the scraping service from the client's region, with a real browser session as the last resort.",
+    ],
+    outcome: "Sites that block automated requests are still crawled, Chrome updates no longer break headless crawls, and blocked images are still retrieved.",
     flow: [
-      { label: "Third-party sources" },
-      { label: "Crawlers", sub: "headless browser · HTTP" },
+      { label: "Listing spiders", sub: "find event URLs" },
       { label: "Message queue", highlight: true },
-      { label: "Background handlers", sub: "dedupe · index · store" },
-      { label: "Search & storage" },
+      { label: "Detail spiders", sub: "HTTP · scraping service · headless" },
+      { label: "Similarity dedupe" },
+      { label: "Indexed event store" },
     ],
   },
   {
-    eyebrow: "Challenge 02 · Identity & Access",
-    title: "Multiple sign-in providers, MFA and per-tenant roles",
+    eyebrow: "Challenge 02 · Multi-tenancy",
+    title: "Keeping shared feeds consistent as features grew",
     problem:
-      "The platform needed social and enterprise sign-in, stronger protection for administrator accounts, and access rules that differ per tenant.",
-    approach:
-      "Standard OAuth 2.0 / OpenID Connect sign-in for each provider, TOTP-based MFA (authenticator app) for administrators, and a role & permission model configurable at runtime.",
-    outcome: "Roles and access levels can be changed per tenant without a code release.",
+      "An event with several dates is stored as linked copies, one of which represents the event in feeds. Once users could post events into feeds and admins could hide single dates or bulk-approve and remove events, a feed could end up pointing at a hidden or removed copy.",
+    myPart:
+      "The feed model was designed by a teammate. I built the features on top of it: user-posted events in feeds, a planning calendar across several feeds, and the feed access-request flow.",
+    decisions: [
+      "Rebuild the representative copy whenever a change touches any date of the event (hide or unhide a date, bulk approve or remove, edit, member removal), so a feed never shows a hidden date.",
+      "After a save, the calendar reloads only once the search index has caught up, so users don't see stale results from an eventually consistent index.",
+      "The calendar sends one request for all selected filters instead of one per filter, and hidden-event lists are paged in the database query.",
+    ],
+    outcome: "Feeds stay consistent through every edit, hide and bulk action, and the calendar shows a change as soon as it is saved.",
     flow: [
-      { label: "User sign-in" },
-      { label: "OAuth 2.0 / OIDC", sub: "social & enterprise providers", highlight: true },
-      { label: "MFA", sub: "administrator accounts" },
-      { label: "Per-tenant roles", sub: "configured at runtime" },
+      { label: "User or admin change" },
+      { label: "Multi-date event", sub: "linked copies" },
+      { label: "Rebuild feed copy", highlight: true },
+      { label: "Search index", sub: "wait to catch up" },
+      { label: "Feeds & calendar" },
     ],
   },
   {
-    eyebrow: "Challenge 03 · Payments",
-    title: "Per-tenant payments and subscriptions",
+    eyebrow: "Challenge 03 · Access & Billing",
+    title: "Per-tenant roles, admin MFA and paid memberships",
     problem:
-      "Each tenant needed to receive payments into its own account, while subscriptions and access had to stay in sync with billing.",
-    approach:
-      "A connected payment account per tenant, hosted checkout and billing pages for subscriptions, and webhook handlers covering the full subscription lifecycle.",
-    outcome: "Access roles are assigned automatically from payment events, with no manual admin step.",
+      "Each tenant defines its own member roles, some of them paid, and administrator accounts needed a second factor. Access had to follow billing without a manual admin step.",
+    myPart: "Built the per-tenant role settings, the subscription billing flow, Microsoft and Apple sign-in, and TOTP MFA for administrators.",
+    decisions: [
+      "Roles are tenant data, not code: configured in the admin UI, with a one-off migration for existing tenants.",
+      "Hosted checkout and customer portal pages, so card data never touches the platform's servers.",
+      "Each webhook is verified against its tenant's signing secret, then handed to a background worker that updates the member's role and billing period.",
+      "MFA as a two-step sign-in: the user isn't signed in until the code is verified, and a new secret is saved only after its first valid code.",
+    ],
+    outcome: "Members gain and lose paid roles automatically as subscriptions start, change or end.",
     flow: [
-      { label: "Tenant subscribes", sub: "hosted checkout" },
-      { label: "Connected account", sub: "one per tenant", highlight: true },
-      { label: "Webhook handlers", sub: "subscription lifecycle" },
-      { label: "Automatic role assignment" },
+      { label: "Member subscribes", sub: "hosted checkout" },
+      { label: "Signed webhook", sub: "verified per tenant", highlight: true },
+      { label: "Background worker", sub: "queue" },
+      { label: "Role & billing period updated" },
     ],
   },
 ];
@@ -206,8 +222,9 @@ export const career = [
     dates: "Apr 2022 – Present",
     current: true,
     points: [
-      "Owned back-end development of a production multi-tenant SaaS platform for an Australian client",
-      "Delivered the data ingestion pipeline, SSO/MFA and Stripe Connect integrations",
+      "Main back-end developer of a production multi-tenant SaaS platform for an Australian client",
+      "Write back-end specs and take features through AI-assisted implementation and production support, with code review from the tech lead",
+      "Built 50+ event source crawlers, shared-feed features, MFA and subscription billing",
       "Worked directly with the client's product team",
     ],
   },

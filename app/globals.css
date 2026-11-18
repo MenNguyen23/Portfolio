@@ -47,7 +47,7 @@ h3 { color:var(--navy); }
 .hero .links b { color:#fff; font-weight:600; margin-right:1.5mm; }
 
 .lead { font-size:9.6pt; color:var(--body); line-height:1.6; }
-.stats { display:grid; grid-template-columns:repeat(4,1fr); gap:3mm; }
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:3mm; }
 .stat { border:1px solid var(--line); border-radius:2.5mm; padding:3mm; border-left:2.5px solid var(--teal); }
 .stat .n { font-size:18pt; font-weight:800; color:var(--navy); line-height:1; }
 .stat .l { font-size:7.5pt; color:var(--muted); margin-top:1.3mm; line-height:1.35; }
@@ -94,7 +94,9 @@ h3 { color:var(--navy); }
 .dd h3 { font-size:10.5pt; margin:0.8mm 0 1mm; }
 .dd .row { display:grid; grid-template-columns:19mm 1fr; gap:2mm; margin-top:1.8mm; }
 .dd .row b { font-size:7.2pt; font-weight:800; letter-spacing:1px; text-transform:uppercase; color:var(--teal-text); padding-top:.5mm; }
-.dd .row p { font-size:8.5pt; color:var(--body); line-height:1.45; }
+.dd .row p, .dd .row li { font-size:8.5pt; color:var(--body); line-height:1.45; }
+.dd .row ul { margin:0; padding-left:3.5mm; }
+.dd .row li + li { margin-top:.8mm; }
 
 .mini { background:var(--soft); border-radius:2.5mm; padding:3mm; display:flex; flex-direction:column; align-items:stretch; justify-content:center; gap:0.8mm; }
 .mini .lbl { font-size:6.8pt; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:#5d6876; text-align:center; margin-bottom:1mm; }
@@ -177,6 +179,7 @@ h3 { color:var(--navy); }
   /* single-column layouts */
   .areas, .scope, .projects, .gallery { grid-template-columns:1fr; }
   .stats { grid-template-columns:repeat(2,1fr); }
+  .stats .stat:last-child:nth-child(odd) { grid-column:1 / -1; }
   .tb-row { grid-template-columns:1fr; gap:.5mm; padding:2.5mm 4mm; }
   .gallery .shot { height:auto; aspect-ratio:16/10; }
   .proj > .shot, .proj.wide > .shot { height:auto; aspect-ratio:16/9; }
@@ -194,7 +197,7 @@ h3 { color:var(--navy); }
   .stat .n { font-size:20pt; }
   .stat .l, .shot .d { font-size:9pt; }
   .area h3, .sc h3, .proj h3, .dd h3 { font-size:11.5pt; }
-  .area p, .ov p, .sc p, .proj p, .dd .row p, .nda, .tb-row, .ti ul li { font-size:10.5pt; }
+  .area p, .ov p, .sc p, .proj p, .dd .row p, .dd .row li, .nda, .tb-row, .ti ul li { font-size:10.5pt; }
   .tb-row b, .ti .pos, .ti .dt, .proj .yr { font-size:10pt; }
   .ti .co { font-size:11pt; }
   .dd .row b, .sc .num, .mini .lbl { font-size:8.5pt; }
